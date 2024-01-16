@@ -1,7 +1,8 @@
-package com.example.getmarketcap
+package com.example.getmarketcap.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.getmarketcap.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

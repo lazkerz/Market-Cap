@@ -1,27 +1,16 @@
 package com.example.getmarketcap.data.remote
 
 import android.content.Context
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
 
-    companion object {
+    val retrofit = Retrofit.Builder()
+        .baseUrl("https://min-api.cryptocompare.com/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 
-        var API_BASE_URL = ""
+    val apiService = retrofit.create(ApiService::class.java)
 
-        inline fun <reified T> getApiService(context: Context ): T {
-            val chuckerInterceptor = ChuckerInterceptor.Builder(context)
-                .collector(ChuckerCollector(context))
-                .maxContentLength(250000L)
-                .redactHeaders(emptySet())
-                .alwaysReadResponseBody(false)
-                .build()
-
-            val retrofit = Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-            return retrofit.newBuilder().client(client).build().create(T::class.java)
-        }
-    }
 }
