@@ -6,11 +6,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
 
-    val retrofit = Retrofit.Builder()
-        .baseUrl("https://min-api.cryptocompare.com/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+    companion object {
+        fun getApiService(): ApiService {
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://min-api.cryptocompare.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
 
-    val apiService = retrofit.create(ApiService::class.java)
+            return retrofit.create(ApiService::class.java)
+        }
+    }
 
 }

@@ -1,101 +1,113 @@
-package com.example.getmarketcap.data.model
+import com.google.gson.annotations.SerializedName
+import io.realm.RealmList
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
+import io.realm.annotations.RealmClass
 
-data class MarketCapResponse(
-	val data: List<DataItem>
-)
+@RealmClass
+open class MarketCapResponseRealm(
+	var data: RealmList<DataItemRealm> = RealmList()
+) : RealmObject()
 
-data class USD(
-	val cONVERSIONTYPE: String,
-	val lASTTRADEID: String,
-	val oPEN24HOUR: String,
-	val hIGHDAY: String,
-	val lOW24HOUR: String,
-	val tOPTIERVOLUME24HOUR: String,
-	val tOTALVOLUME24HTO: String,
-	val tOSYMBOL: String,
-	val lASTMARKET: String,
-	val lASTVOLUME: String,
-	val cIRCULATINGSUPPLY: String,
-	val lOWHOUR: String,
-	val cONVERSIONSYMBOL: String,
-	val mKTCAP: String,
-	val lASTUPDATE: String,
-	val cHANGEPCTHOUR: String,
-	val tOTALVOLUME24H: String,
-	val vOLUMEHOURTO: String,
-	val vOLUMEHOUR: String,
-	val tOPTIERVOLUME24HOURTO: String,
-	val cHANGEDAY: String,
-	val fLAGS: String,
-	val sUPPLY: String,
-	val mEDIAN: Any,
-	val tYPE: String,
-	val iMAGEURL: String,
-	val vOLUMEDAY: String,
-	val vOLUME24HOUR: String,
-	val mARKET: String,
-	val pRICE: String,
-	val cHANGEPCTDAY: String,
-	val tOTALTOPTIERVOLUME24H: String,
-	val cONVERSIONLASTUPDATE: String,
-	val fROMSYMBOL: String,
-	val lASTVOLUMETO: String,
-	val cIRCULATINGSUPPLYMKTCAP: String,
-	val cHANGEPCT24HOUR: String,
-	val oPENDAY: String,
-	val tOTALTOPTIERVOLUME24HTO: String,
-	val vOLUMEDAYTO: String,
-	val oPENHOUR: String,
-	val cHANGE24HOUR: String,
-	val cHANGEHOUR: String,
-	val hIGH24HOUR: String,
-	val vOLUME24HOURTO: String,
-	val hIGHHOUR: String,
-	val lOWDAY: String,
-	val mKTCAPPENALTY: String
-)
+@RealmClass
+open class USDRealm(
+	var cONVERSIONTYPE: String? = null,
+	var lASTTRADEID: String? = null,
+	var oPEN24HOUR: String? = null,
+	var hIGHDAY: String? = null,
+	var lOW24HOUR: String? = null,
+	var tOPTIERVOLUME24HOUR: String? = null,
+	var tOTALVOLUME24HTO: String? = null,
+	var tOSYMBOL: String? = null,
+	var lASTMARKET: String? = null,
+	var lASTVOLUME: String? = null,
+	var cIRCULATINGSUPPLY: String? = null,
+	var lOWHOUR: String? = null,
+	var cONVERSIONSYMBOL: String? = null,
+	var mKTCAP: String? = null,
+	var lASTUPDATE: String? = null,
+	var cHANGEPCTHOUR: String? = null,
+	var tOTALVOLUME24H: String? = null,
+	var vOLUMEHOURTO: String? = null,
+	var vOLUMEHOUR: String? = null,
+	var tOPTIERVOLUME24HOURTO: String? = null,
+	var cHANGEDAY: String? = null,
+	var fLAGS: String? = null,
+	var sUPPLY: String? = null,
+	var mEDIAN: Any? = null,
+	var tYPE: String? = null,
+	var iMAGEURL: String? = null,
+	var vOLUMEDAY: String? = null,
+	var vOLUME24HOUR: String? = null,
+	var mARKET: String? = null,
+	var pRICE: String? = null,
+	var cHANGEPCTDAY: String? = null,
+	var tOTALTOPTIERVOLUME24H: String? = null,
+	var cONVERSIONLASTUPDATE: String? = null,
+	var fROMSYMBOL: String? = null,
+	var lASTVOLUMETO: String? = null,
+	var cIRCULATINGSUPPLYMKTCAP: String? = null,
+	var cHANGEPCT24HOUR: String? = null,
+	var oPENDAY: String? = null,
+	var tOTALTOPTIERVOLUME24HTO: String? = null,
+	var vOLUMEDAYTO: String? = null,
+	var oPENHOUR: String? = null,
+	var cHANGE24HOUR: String? = null,
+	var cHANGEHOUR: String? = null,
+	var hIGH24HOUR: String? = null,
+	var vOLUME24HOURTO: String? = null,
+	var hIGHHOUR: String? = null,
+	var lOWDAY: String? = null,
+	var mKTCAPPENALTY: String? = null
+) : RealmObject()
 
-data class RAW(
-	val uSD: USD
-)
+@RealmClass
+open class RAWRealm(
+	var uSD: USDRealm? = null
+) : RealmObject()
 
-data class Rating(
-	val weiss: Weiss
-)
+@RealmClass
+open class RatingRealm(
+	var weiss: WeissRealm? = null
+) : RealmObject()
 
-data class DISPLAY(
-	val uSD: USD
-)
+@RealmClass
+open class DISPLAYRealm(
+	var uSD: USDRealm? = null
+) : RealmObject()
 
-data class Weiss(
-	val rating: String,
-	val technologyAdoptionRating: String,
-	val marketPerformanceRating: String
-)
+@RealmClass
+open class WeissRealm(
+	var rating: String? = null,
+	var technologyAdoptionRating: String? = null,
+	var marketPerformanceRating: String? = null
+) : RealmObject()
 
-data class DataItem(
-	val dISPLAY: DISPLAY,
-	val rAW: RAW,
-	val coinInfo: CoinInfo
-)
+@RealmClass
+open class DataItemRealm(
+	var dISPLAY: DISPLAYRealm? = null,
+	var rAW: RAWRealm? = null,
+	var coinInfo: CoinInfoRealm? = null
+) : RealmObject()
 
-data class CoinInfo(
-	val internal: String,
-	val rating: Rating,
-	val blockTime: Any,
-	val imageUrl: String,
-	val maxSupply: Any,
-	val documentType: String,
-	val algorithm: String,
-	val url: String,
-	val name: String,
-	val type: Int,
-	val proofType: String,
-	val netHashesPerSecond: Any,
-	val assetLaunchDate: String,
-	val fullName: String,
-	val id: String,
-	val blockNumber: Int,
-	val blockReward: Any
-)
-
+@RealmClass
+open class CoinInfoRealm(
+	var internal: String? = null,
+	var rating: RatingRealm? = null,
+	var blockTime: Any? = null,
+	var imageUrl: String? = null,
+	var maxSupply: Any? = null,
+	var documentType: String? = null,
+	var algorithm: String? = null,
+	var url: String? = null,
+	var name: String? = null,
+	var type: Int? = null,
+	var proofType: String? = null,
+	var netHashesPerSecond: Any? = null,
+	var assetLaunchDate: String? = null,
+	var fullName: String? = null,
+	@PrimaryKey
+	var id: String? = null,
+	var blockNumber: Int? = null,
+	var blockReward: Any? = null
+) : RealmObject()
