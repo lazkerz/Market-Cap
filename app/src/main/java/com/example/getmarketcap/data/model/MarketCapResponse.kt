@@ -3,13 +3,14 @@ import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
+import io.realm.kotlin.types.RealmList
+import io.realm.kotlin.types.RealmObject
+import io.realm.kotlin.types.annotations.PrimaryKey
 
-@RealmClass
 open class MarketCapResponseRealm(
 	var data: RealmList<DataItemRealm> = RealmList()
 ) : RealmObject()
 
-@RealmClass
 open class USDRealm(
 	var cONVERSIONTYPE: String? = null,
 	var lASTTRADEID: String? = null,
@@ -61,7 +62,6 @@ open class USDRealm(
 	var mKTCAPPENALTY: String? = null
 ) : RealmObject()
 
-@RealmClass
 open class RAWRealm(
 	var uSD: USDRealm? = null
 ) : RealmObject()
