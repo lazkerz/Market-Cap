@@ -18,13 +18,13 @@ import java.util.Collections.list
 		var message: String? = "",
 
 	@field:SerializedName("MetaData")
-		var metaData: RealmList<MetaData> = RealmList(),
+		var metaData: MetaData?= null,
 
 	@field:SerializedName("Data")
 		var data: RealmList<DataItem> = RealmList(),
 
 	@field:SerializedName("SponsoredData")
-		var sponsoredData: String? = ""
+		var sponsoredData: RealmList<String> = RealmList()
 	) : RealmObject(), Serializable
 
 	@RealmClass
