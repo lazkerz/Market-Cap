@@ -12,13 +12,15 @@ class MarketCapPresenter(
     private val view: MarketView,
 )  {
 
+
+
     fun getMarketCapData() {
         try {
             val response = apiservice.getMarketCapData()
             val items = response.data
             view.onMarketCapDataResult(ResultState.Success(items))
         } catch (e: Exception) {
-            view.onMarketCapDataResult(ResultState.Error(e.message.toString()))
+            view.onMarketCapError(ResultState.Error(e.message.toString()))
         }
     }
 
