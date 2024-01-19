@@ -5,6 +5,6 @@ import com.example.getmarketcap.model.MarketCapResponse
 import retrofit2.http.GET
 
 interface ApiService {
-        @GET("marketCapData")
+        @GET("data/top/mktcapfull?limit=10&tsym=USD")
         fun getMarketCapData(): MarketCapResponse
 }

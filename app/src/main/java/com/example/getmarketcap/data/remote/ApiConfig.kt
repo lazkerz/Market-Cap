@@ -8,7 +8,7 @@ class ApiConfig private constructor() {
     companion object {
 
         private const val BASE_URL =
-            "https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD"
+            "https://min-api.cryptocompare.com/"
 
         private val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)

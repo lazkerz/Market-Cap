@@ -8,11 +8,9 @@ import com.example.getmarketcap.utils.ResultState
 
 
 class MarketCapPresenter(
-    private val apiservice: ApiService = ApiConfig.getApiService(),
+    private val apiservice: ApiService,
     private val view: MarketView,
 )  {
-
-
 
     fun getMarketCapData() {
         try {
@@ -20,7 +18,7 @@ class MarketCapPresenter(
             val items = response.data
             view.onMarketCapDataResult(ResultState.Success(items))
         } catch (e: Exception) {
-            view.onMarketCapError(ResultState.Error(e.message.toString()))
+            view.onMarketCapDataResult(ResultState.Error(e.message.toString()))
         }
     }
 

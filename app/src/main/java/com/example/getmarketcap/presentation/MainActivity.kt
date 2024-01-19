@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.getmarketcap.R
 import com.example.getmarketcap.data.remote.ApiConfig
+import com.example.getmarketcap.data.remote.ApiService
 import com.example.getmarketcap.model.DataItem
 import com.example.getmarketcap.presentation.presenter.MarketCapPresenter
 import com.example.getmarketcap.presentation.view.MarketView
 import com.example.getmarketcap.utils.ResultState
+import io.realm.RealmList
 
 class MainActivity : AppCompatActivity(), MarketView {
 
@@ -16,14 +18,16 @@ class MainActivity : AppCompatActivity(), MarketView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val apiService = ApiConfig.getApiService()
         presenter = MarketCapPresenter(
-            ApiConfig.getApiService(),
+            apiService,
             this
         )
 
         presenter.getMarketCapData()
     }
-    override fun onMarketCapDataResult(result: ResultState.Success<List<DataItem>>) {
+    override fun onMarketCapDataResult(result: ResultState<RealmList<DataItem>>) {
         when (result) {
             is ResultState.Success -> {
                 // Handle data berhasil diterima
