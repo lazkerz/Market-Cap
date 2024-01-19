@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("io.realm.kotlin")
     id("kotlin-kapt")
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
 }
 
 android {
@@ -40,6 +41,8 @@ android {
 
 dependencies {
 
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
@@ -58,12 +61,21 @@ dependencies {
     implementation("io.realm.kotlin:library-base:1.11.0")
     implementation("io.realm.kotlin:library-sync:1.11.0") // If using Device Sync
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0") // If using coroutines with the SDK
-    kapt("io.realm:realm-annotations-processor:10.10.0")
+    kapt("io.realm:realm-annotations-processor:10.9.0")
+    implementation("io.realm:realm-android-library:10.9.0")
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
+
+    // LiveData, Preferences
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation ("androidx.activity:activity-ktx:1.8.2")
+    implementation ("androidx.datastore:datastore-preferences:1.0.0")
+    implementation ("com.google.code.gson:gson:2.10.1")
 
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 
 }
 

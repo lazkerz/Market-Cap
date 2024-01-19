@@ -1,11 +1,10 @@
 package com.example.getmarketcap.data.remote
 
-import com.example.getmarketcap.data.model.DataItem
-import com.example.getmarketcap.data.model.MarketCapResponse
-import retrofit2.Call
+
+import com.example.getmarketcap.model.MarketCapResponse
 import retrofit2.http.GET
 
 interface ApiService {
-        @GET("data/top/mktcapfull?limit=10&tsym=USD")
+        @GET("marketCapData")
         fun getMarketCapData(): MarketCapResponse
 }

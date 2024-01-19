@@ -3,38 +3,66 @@ package com.example.getmarketcap.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.getmarketcap.R
-import com.example.getmarketcap.data.model.DataItem
-import com.example.getmarketcap.presentation.contract.MarketCapContract
-import com.example.getmarketcap.presentation.model.MarketCapModel
+import com.example.getmarketcap.data.remote.ApiConfig
+import com.example.getmarketcap.model.DataItem
 import com.example.getmarketcap.presentation.presenter.MarketCapPresenter
+import com.example.getmarketcap.presentation.view.MarketView
+import com.example.getmarketcap.utils.ResultState
+import io.realm.kotlin.types.RealmList
 
-class MainActivity : AppCompatActivity(), MarketCapContract.View {
+class MainActivity : AppCompatActivity(), MarketView {
 
-    private lateinit var presenter: MarketCapContract.Presenter
+    private lateinit var presenter: MarketCapPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        presenter = MarketCapPresenter(
+            ApiConfig.getApiService(),
+            this
+        )
 
-        val model: MarketCapContract.Model = MarketCapModel()
-        presenter = MarketCapPresenter(this, model)
-
-        // Panggil method pada presenter untuk mendapatkan data
         presenter.getMarketCapData()
     }
+    override fun onMarketCapDataResult(result: ResultState<List<DataItem>>) {
+        when (result) {
+            is ResultState.Success -> {
+                // Handle data berhasil diterima
+                val marketCapData = result.data
+                if (marketCapData.isNotEmpty()) {
+                    log("Anda mendapatkan data marketnya")
+                    // Lakukan sesuatu dengan data, contohnya:
+                    // update UI, memproses data, dsb.
+                } else {
+                    log("Data kosong.")
+                    // Lakukan sesuatu saat data kosong
+                }
 
-    override fun showMarketCapData(data: List<DataItem>) {
-        // Tampilkan data di UI, contohnya bisa menggunakan RecyclerView atau cara lainnya
-        // ...
+                // Lakukan sesuatu dengan data, contohnya:
+                // update UI, memproses data, dsb.
+            }
+            is ResultState.Error -> {
+                // Handle jika terjadi error
+                val errorMessage = result.error
+                log("Error: $errorMessage")
+                // Lakukan sesuatu dengan pesan error, contohnya:
+                // tampilkan pesan error kepada pengguna
+            }
+            is ResultState.Loading -> {
+                // Handle loading state
+                log("Loading...")
+                // Lakukan sesuatu saat data sedang di-load, contohnya:
+                // tampilkan indikator loading
+            }
+        }
     }
 
-    override fun showError(message: String) {
-        // Tampilkan pesan kesalahan di UI, misalnya menggunakan Toast
-        // ...
+    private fun log(message: String) {
+        // Metode log Anda untuk menampilkan pesan pada LogCat
+        // Anda dapat menggunakan Log.d("TAG", message) atau metode log lainnya
+        // Sesuaikan dengan kebutuhan aplikasi Anda
+        // Misalnya: Log.d("MainActivity", message)
+        println(message)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.onDestroy()
-    }
 }

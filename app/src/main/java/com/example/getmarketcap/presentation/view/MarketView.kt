@@ -1,8 +1,9 @@
 package com.example.getmarketcap.presentation.view
 
-import com.example.getmarketcap.data.model.DataItem
+
+import com.example.getmarketcap.model.DataItem
+import com.example.getmarketcap.utils.ResultState
 
 interface MarketView {
-    fun showMarketCapData(data: List<DataItem>)
-    fun showError(message: String)
+    fun onMarketCapDataResult(result: ResultState<List<DataItem>>)
 }
