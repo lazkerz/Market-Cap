@@ -3,7 +3,6 @@ package com.example.getmarketcap.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
 import com.example.getmarketcap.R
 import com.example.getmarketcap.data.remote.ApiConfig
 import com.example.getmarketcap.data.remote.ApiService
@@ -12,7 +11,6 @@ import com.example.getmarketcap.presentation.presenter.MarketCapPresenter
 import com.example.getmarketcap.presentation.view.MarketView
 import com.example.getmarketcap.utils.ResultState
 import io.realm.RealmList
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), MarketView {
 
@@ -22,18 +20,14 @@ class MainActivity : AppCompatActivity(), MarketView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val apiService = ApiConfig.getApiService(this)
+        val apiService = ApiConfig.getApiService()
+        presenter = MarketCapPresenter(
+            apiService,
+            this
+        )
 
-        // Inisialisasi presenter dengan coroutine
-        presenter = MarketCapPresenter(apiService, this)
-
-        // Jalankan coroutine untuk memanggil fungsi suspend
-        lifecycleScope.launch {
-            presenter.getMarketCapData()
-        }
-
+        presenter.getMarketCapData()
     }
-
     override fun onMarketCapDataResult(result: ResultState<RealmList<DataItem>>) {
         when (result) {
             is ResultState.Success -> {
