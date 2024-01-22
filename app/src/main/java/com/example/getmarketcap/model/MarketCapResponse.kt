@@ -60,7 +60,7 @@ import java.util.Collections.list
 	) : RealmObject(), Serializable
 
 	@RealmClass
-	open class USD(
+	open class DisplayUSD(
 		@field:SerializedName("TYPE") var type: String = "",
 		@field:SerializedName("MARKET") var market: String = "",
 		@field:SerializedName("FROMSYMBOL") var fromSymbol: String = "",
@@ -79,7 +79,6 @@ import java.util.Collections.list
 
 	@RealmClass
 	open class RawUSD(
-
 		@field:SerializedName("CONVERSIONTYPE") var cONVERSIONTYPE: String = "",
 		@field:SerializedName("LASTTRADEID") var lASTTRADEID: String = "",
 		@field:SerializedName("OPEN24HOUR") var oPEN24HOUR: Double = 0.0,
@@ -97,108 +96,32 @@ import java.util.Collections.list
 		@field:SerializedName("LASTUPDATE") var lASTUPDATE: Int = 0,
 		@field:SerializedName("CHANGEPCTHOUR") var cHANGEPCTHOUR: Double = 0.0,
 		@field:SerializedName("TOTALVOLUME24H") var tOTALVOLUME24H: Double = 0.0,
-		@field:SerializedName("VOLUMEHOURTO")
-		val vOLUMEHOURTO: Any,
-
-		@field:SerializedName("VOLUMEHOUR")
-		val vOLUMEHOUR: Any,
-
-		@field:SerializedName("TOPTIERVOLUME24HOURTO")
-		val tOPTIERVOLUME24HOURTO: Any,
-
-		@field:SerializedName("CHANGEDAY")
-		val cHANGEDAY: Any,
-
-		@field:SerializedName("FLAGS")
-		val fLAGS: String,
-
-		@field:SerializedName("SUPPLY")
-		val sUPPLY: Int,
-
-		@field:SerializedName("MEDIAN")
-		val mEDIAN: Any,
-
-		@field:SerializedName("TYPE")
-		val tYPE: String,
-
-		@field:SerializedName("IMAGEURL")
-		val iMAGEURL: String,
-
-		@field:SerializedName("VOLUMEDAY")
-		val vOLUMEDAY: Any,
-
-		@field:SerializedName("VOLUME24HOUR")
-		val vOLUME24HOUR: Any,
-
-		@field:SerializedName("MARKET")
-		val mARKET: String,
-
-		@field:SerializedName("PRICE")
-		val pRICE: Any,
-
-		@field:SerializedName("CHANGEPCTDAY")
-		val cHANGEPCTDAY: Any,
-
-		@field:SerializedName("TOTALTOPTIERVOLUME24H")
-		val tOTALTOPTIERVOLUME24H: Any,
-
-		@field:SerializedName("CONVERSIONLASTUPDATE")
-		val cONVERSIONLASTUPDATE: Int,
-
-		@field:SerializedName("FROMSYMBOL")
-		val fROMSYMBOL: String,
-
-		@field:SerializedName("LASTVOLUMETO")
-		val lASTVOLUMETO: Any,
-
-		@field:SerializedName("CIRCULATINGSUPPLYMKTCAP")
-		val cIRCULATINGSUPPLYMKTCAP: Any,
-
-		@field:SerializedName("CHANGEPCT24HOUR")
-		val cHANGEPCT24HOUR: Any,
-
-		@field:SerializedName("OPENDAY")
-		val oPENDAY: Any,
-
-		@field:SerializedName("TOTALTOPTIERVOLUME24HTO")
-		val tOTALTOPTIERVOLUME24HTO: Any,
-
-		@field:SerializedName("VOLUMEDAYTO")
-		val vOLUMEDAYTO: Any,
-
-		@field:SerializedName("OPENHOUR")
-		val oPENHOUR: Any,
-
-		@field:SerializedName("CHANGE24HOUR")
-		val cHANGE24HOUR: Any,
-
-		@field:SerializedName("CHANGEHOUR")
-		val cHANGEHOUR: Any,
-
-		@field:SerializedName("HIGH24HOUR")
-		val hIGH24HOUR: Any,
-
-		@field:SerializedName("VOLUME24HOURTO")
-		val vOLUME24HOURTO: Any,
-
-		@field:SerializedName("HIGHHOUR")
-		val hIGHHOUR: Any,
-
-		@field:SerializedName("LOWDAY")
-		val lOWDAY: Any,
-
-		@field:SerializedName("MKTCAPPENALTY")
-		val mKTCAPPENALTY: Int
+		@field:SerializedName("VOLUMEHOURTO")val vOLUMEHOURTO: Double = 0.0,
+		@field:SerializedName("VOLUMEHOUR") var vOLUMEHOUR: Double = 0.0,
+		@field:SerializedName("TOPTIERVOLUME24HOURTO") var tOPTIERVOLUME24HOURTO: Double = 0.0,
+		@field:SerializedName("CHANGEDAY") var cHANGEDAY: Double = 0.0,
+		@field:SerializedName("FLAGS") var fLAGS: String = "",
+		@field:SerializedName("SUPPLY") var sUPPLY: Int = 0,
+		@field:SerializedName("MEDIAN") var mEDIAN: Double = 0.0,
+		@field:SerializedName("TYPE") var tYPE: String = "",
+		@field:SerializedName("IMAGEURL") var iMAGEURL: String = "",
+		@field:SerializedName("VOLUMEDAY") var vOLUMEDAY: Double = 0.0,
+		@field:SerializedName("VOLUME24HOUR") var vOLUME24HOUR: Double = 0.0,
+		@field:SerializedName("MARKET") var mARKET: String = "",
+		@field:SerializedName("PRICE") var pRICE: Double = 0.0,
+		@field:SerializedName("CHANGEPCTDAY") var cHANGEPCTDAY: Double = 0.0,
+		@field:SerializedName("TOTALTOPTIERVOLUME24H") var tOTALTOPTIERVOLUME24H: Double = 0.0,
+		@field:SerializedName("CONVERSIONLASTUPDATE") var cONVERSIONLASTUPDATE: Int = 0,
 	) : RealmObject(), Serializable
 
 	@RealmClass
 	open class RAW(
-		@SerializedName("USD") var usd: USD? = null
+		@SerializedName("USD") var usd: RawUSD? = null
 	) : RealmObject(), Serializable
 
 	@RealmClass
 	open class DISPLAY(
-		@SerializedName("USD") var usd: USD? = null
+		@SerializedName("USD") var usd: DisplayUSD? = null
 	) : RealmObject(), Serializable
 
 	@RealmClass

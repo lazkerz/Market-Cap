@@ -6,6 +6,7 @@ import com.example.getmarketcap.model.DataItem
 import com.example.getmarketcap.model.MarketCapResponse
 import com.example.getmarketcap.model.MetaData
 import com.example.getmarketcap.model.RAW
+import com.example.getmarketcap.model.RawUSD
 import com.example.getmarketcap.model.Rating
 import com.example.getmarketcap.model.USD
 import com.example.getmarketcap.model.Weiss
@@ -18,6 +19,7 @@ import io.realm.RealmConfiguration
 //            MarketCapResponse:: class,
 //            DataItem::class,
 //            USD::class,
+//            RawUSD::class,
 //            Weiss::class,
 //            RAW::class,
 //            MetaData::class,
