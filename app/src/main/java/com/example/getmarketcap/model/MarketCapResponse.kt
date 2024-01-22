@@ -18,13 +18,13 @@ import java.util.Collections.list
 		var message: String? = "",
 
 	@field:SerializedName("MetaData")
-		var metaData: RealmList<MetaData> = RealmList(),
+		var metaData: MetaData?= null,
 
 	@field:SerializedName("Data")
 		var data: RealmList<DataItem> = RealmList(),
 
 	@field:SerializedName("SponsoredData")
-		var sponsoredData: String? = ""
+		var sponsoredData: RealmList<String> = RealmList()
 	) : RealmObject(), Serializable
 
 	@RealmClass
@@ -113,6 +113,98 @@ import java.util.Collections.list
 		@field:SerializedName("CHANGEPCTDAY") var cHANGEPCTDAY: Double = 0.0,
 		@field:SerializedName("TOTALTOPTIERVOLUME24H") var tOTALTOPTIERVOLUME24H: Double = 0.0,
 		@field:SerializedName("CONVERSIONLASTUPDATE") var cONVERSIONLASTUPDATE: Int = 0,
+		@field:SerializedName("VOLUMEHOURTO")
+		val vOLUMEHOURTO: Any,
+
+		@field:SerializedName("VOLUMEHOUR")
+		val vOLUMEHOUR: Any,
+
+		@field:SerializedName("TOPTIERVOLUME24HOURTO")
+		val tOPTIERVOLUME24HOURTO: Any,
+
+		@field:SerializedName("CHANGEDAY")
+		val cHANGEDAY: Any,
+
+		@field:SerializedName("FLAGS")
+		val fLAGS: String,
+
+		@field:SerializedName("SUPPLY")
+		val sUPPLY: Int,
+
+		@field:SerializedName("MEDIAN")
+		val mEDIAN: Any,
+
+		@field:SerializedName("TYPE")
+		val tYPE: String,
+
+		@field:SerializedName("IMAGEURL")
+		val iMAGEURL: String,
+
+		@field:SerializedName("VOLUMEDAY")
+		val vOLUMEDAY: Any,
+
+		@field:SerializedName("VOLUME24HOUR")
+		val vOLUME24HOUR: Any,
+
+		@field:SerializedName("MARKET")
+		val mARKET: String,
+
+		@field:SerializedName("PRICE")
+		val pRICE: Any,
+
+		@field:SerializedName("CHANGEPCTDAY")
+		val cHANGEPCTDAY: Any,
+
+		@field:SerializedName("TOTALTOPTIERVOLUME24H")
+		val tOTALTOPTIERVOLUME24H: Any,
+
+		@field:SerializedName("CONVERSIONLASTUPDATE")
+		val cONVERSIONLASTUPDATE: Int,
+
+		@field:SerializedName("FROMSYMBOL")
+		val fROMSYMBOL: String,
+
+		@field:SerializedName("LASTVOLUMETO")
+		val lASTVOLUMETO: Any,
+
+		@field:SerializedName("CIRCULATINGSUPPLYMKTCAP")
+		val cIRCULATINGSUPPLYMKTCAP: Any,
+
+		@field:SerializedName("CHANGEPCT24HOUR")
+		val cHANGEPCT24HOUR: Any,
+
+		@field:SerializedName("OPENDAY")
+		val oPENDAY: Any,
+
+		@field:SerializedName("TOTALTOPTIERVOLUME24HTO")
+		val tOTALTOPTIERVOLUME24HTO: Any,
+
+		@field:SerializedName("VOLUMEDAYTO")
+		val vOLUMEDAYTO: Any,
+
+		@field:SerializedName("OPENHOUR")
+		val oPENHOUR: Any,
+
+		@field:SerializedName("CHANGE24HOUR")
+		val cHANGE24HOUR: Any,
+
+		@field:SerializedName("CHANGEHOUR")
+		val cHANGEHOUR: Any,
+
+		@field:SerializedName("HIGH24HOUR")
+		val hIGH24HOUR: Any,
+
+		@field:SerializedName("VOLUME24HOURTO")
+		val vOLUME24HOURTO: Any,
+
+		@field:SerializedName("HIGHHOUR")
+		val hIGHHOUR: Any,
+
+		@field:SerializedName("LOWDAY")
+		val lOWDAY: Any,
+
+		@field:SerializedName("MKTCAPPENALTY")
+		val mKTCAPPENALTY: Int
 	) : RealmObject(), Serializable
 
 	@RealmClass

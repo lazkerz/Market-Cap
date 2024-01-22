@@ -2,6 +2,7 @@ package com.example.getmarketcap.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.getmarketcap.R
 import com.example.getmarketcap.data.remote.ApiConfig
 import com.example.getmarketcap.data.remote.ApiService
@@ -31,41 +32,26 @@ class MainActivity : AppCompatActivity(), MarketView {
         when (result) {
             is ResultState.Success -> {
                 // Handle data berhasil diterima
-                val marketCapData = result.data
-                if (marketCapData.isNotEmpty()) {
-                    log("Anda mendapatkan data marketnya")
-                    // Lakukan sesuatu dengan data, contohnya:
-                    // update UI, memproses data, dsb.
-                } else {
-                    log("Data kosong.")
-                    // Lakukan sesuatu saat data kosong
-                }
+//                val marketCapData = result.data
+                Toast.makeText(this, "Found Market Cap Data", Toast.LENGTH_SHORT).show();
 
                 // Lakukan sesuatu dengan data, contohnya:
                 // update UI, memproses data, dsb.
             }
             is ResultState.Error -> {
                 // Handle jika terjadi error
-                val errorMessage = result.error
-                log("Error: $errorMessage")
+//                val errorMessage = result.error
+                Toast.makeText(this, "data not found", Toast.LENGTH_SHORT).show();
                 // Lakukan sesuatu dengan pesan error, contohnya:
                 // tampilkan pesan error kepada pengguna
             }
             is ResultState.Loading -> {
                 // Handle loading state
-                log("Loading...")
+                Toast.makeText(this, "Loading..", Toast.LENGTH_SHORT).show();
                 // Lakukan sesuatu saat data sedang di-load, contohnya:
                 // tampilkan indikator loading
             }
         }
-    }
-
-    private fun log(message: String) {
-        // Metode log Anda untuk menampilkan pesan pada LogCat
-        // Anda dapat menggunakan Log.d("TAG", message) atau metode log lainnya
-        // Sesuaikan dengan kebutuhan aplikasi Anda
-        // Misalnya: Log.d("MainActivity", message)
-        println(message)
     }
 
 }
