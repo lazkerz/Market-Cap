@@ -6,11 +6,12 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.getmarketcap.R
 import com.example.getmarketcap.data.remote.ApiConfig
-import com.example.getmarketcap.data.remote.ApiService
 import com.example.getmarketcap.model.DataItem
+import com.example.getmarketcap.model.MarketCapResponse
 import com.example.getmarketcap.presentation.presenter.MarketCapPresenter
 import com.example.getmarketcap.presentation.view.MarketView
 import com.example.getmarketcap.utils.ResultState
+import io.realm.Realm
 import io.realm.RealmList
 import kotlinx.coroutines.launch
 
@@ -22,12 +23,20 @@ class MainActivity : AppCompatActivity(), MarketView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Realm.init(this)
+
         val apiService = ApiConfig.getApiService(this)
 
-        presenter = MarketCapPresenter(apiService, this)
+        presenter = MarketCapPresenter(
+            apiService
+            , this
+
+        )
 
         lifecycleScope.launch {
             presenter.getMarketCapData()
+            presenter.saveDataToRealm(DataItem())
+            presenter.saveDataFromRetrofit(MarketCapResponse())
         }
 
     }

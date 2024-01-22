@@ -23,8 +23,8 @@ import java.util.Collections.list
 	@field:SerializedName("Data")
 		var data: RealmList<DataItem> = RealmList(),
 
-	@field:SerializedName("SponsoredData")
-		var sponsoredData: RealmList<String> = RealmList()
+//	@field:SerializedName("SponsoredData")
+//		var sponsoredData: RealmList<String> = RealmList()
 	) : RealmObject(), Serializable
 
 	@RealmClass

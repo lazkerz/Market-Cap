@@ -3,6 +3,9 @@ package com.example.getmarketcap.data.remote
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.example.getmarketcap.model.MarketCapResponse
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -31,6 +34,18 @@ class ApiConfig private constructor() {
             val client = OkHttpClient.Builder()
                 .addInterceptor(chuckerInterceptor)
                 .build()
+
+            val realmConfig = RealmConfiguration.Builder()
+                .name("marketcap.realm")
+                .deleteRealmIfMigrationNeeded()
+                .schemaVersion(14)
+//                .initialData {realm ->
+//                    var initialDataItem = realm.createObject(MarketCapResponse::class.java)
+//                    initialDataItem.data,
+//                    initialDataItem.metaData,
+//                }
+                .build()
+            Realm.setDefaultConfiguration(realmConfig)
 
             return retrofit.newBuilder().client(client).build().create(ApiService::class.java)
         }

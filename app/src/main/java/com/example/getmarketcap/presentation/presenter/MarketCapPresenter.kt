@@ -3,9 +3,14 @@ package com.example.getmarketcap.presentation.presenter
 
 import android.util.Log
 import com.example.getmarketcap.data.remote.ApiService
+import com.example.getmarketcap.model.CoinInfo
+import com.example.getmarketcap.model.DataItem
 import com.example.getmarketcap.model.MarketCapResponse
+import com.example.getmarketcap.model.RAW
+import com.example.getmarketcap.model.RawUSD
 import com.example.getmarketcap.presentation.view.MarketView
 import com.example.getmarketcap.utils.ResultState
+import io.realm.Realm
 import io.realm.RealmList
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,6 +50,34 @@ class MarketCapPresenter(
         } catch (e: Exception) {
             Log.e("MarketCap", "Error: ${e.message}")
             view.onMarketCapDataResult(ResultState.Error(e.message.toString()))
+        }
+    }
+
+    fun saveDataToRealm(dataItem: DataItem) {
+        val realm = Realm.getDefaultInstance()
+        realm.executeTransaction { realm ->
+            realm.copyToRealmOrUpdate(dataItem)
+        }
+        realm.close()
+    }
+
+    fun saveDataFromRetrofit(marketCapResponse: MarketCapResponse) {
+        val coinInfoName = marketCapResponse.data[0]?.coinInfo?.name
+        val coinInfoFullName = marketCapResponse.data[0]?.coinInfo?.fullName
+        val rawPrice = marketCapResponse.data[0]?.raw?.usd?.price
+        if (!coinInfoName.isNullOrBlank()) {
+            val simplifiedDataItem = DataItem().apply {
+                coinInfo = CoinInfo().apply {
+                    name = coinInfoName
+                    fullName = coinInfoFullName ?: ""
+                }
+                raw = RAW().apply { // Perbaiki penulisan class RAW
+                    usd = RawUSD().apply {
+                        price = rawPrice ?: 0.0 // Jika rawPrice null, berikan nilai default
+                    }
+                }
+            }
+            saveDataToRealm(simplifiedDataItem)
         }
     }
 
