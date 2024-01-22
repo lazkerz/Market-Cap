@@ -78,8 +78,46 @@ import java.util.Collections.list
 	) : RealmObject(), Serializable
 
 	@RealmClass
+	open class RawUSD(
+
+		@field:SerializedName("CONVERSIONTYPE") var cONVERSIONTYPE: String = "",
+		@field:SerializedName("LASTTRADEID") var lASTTRADEID: String = "",
+		@field:SerializedName("OPEN24HOUR") var oPEN24HOUR: Double = 0.0,
+		@field:SerializedName("HIGHDAY") var hIGHDAY: Double = 0.0,
+		@field:SerializedName("LOW24HOUR") var lOW24HOUR: Double = 0.0,
+		@field:SerializedName("TOPTIERVOLUME24HOUR") val tOPTIERVOLUME24HOUR: Double = 0.0,
+		@field:SerializedName("TOTALVOLUME24HTO") var tOTALVOLUME24HTO: Double = 0.0,
+		@field:SerializedName("TOSYMBOL") var tOSYMBOL: String = "",
+		@field:SerializedName("LASTMARKET") var lASTMARKET: String = "",
+		@field:SerializedName("LASTVOLUME") var lASTVOLUME: Double = 0.0,
+		@field:SerializedName("CIRCULATINGSUPPLY") var cIRCULATINGSUPPLY: Int = 0,
+		@field:SerializedName("LOWHOUR") var lOWHOUR: Double = 0.0,
+		@field:SerializedName("CONVERSIONSYMBOL") var cONVERSIONSYMBOL: String = "",
+		@field:SerializedName("MKTCAP") var mKTCAP: Double = 0.0,
+		@field:SerializedName("LASTUPDATE") var lASTUPDATE: Int = 0,
+		@field:SerializedName("CHANGEPCTHOUR") var cHANGEPCTHOUR: Double = 0.0,
+		@field:SerializedName("TOTALVOLUME24H") var tOTALVOLUME24H: Double = 0.0,
+		@field:SerializedName("VOLUMEHOURTO")val vOLUMEHOURTO: Double = 0.0,
+		@field:SerializedName("VOLUMEHOUR") var vOLUMEHOUR: Double = 0.0,
+		@field:SerializedName("TOPTIERVOLUME24HOURTO") var tOPTIERVOLUME24HOURTO: Double = 0.0,
+		@field:SerializedName("CHANGEDAY") var cHANGEDAY: Double = 0.0,
+		@field:SerializedName("FLAGS") var fLAGS: String = "",
+		@field:SerializedName("SUPPLY") var sUPPLY: Int = 0,
+		@field:SerializedName("MEDIAN") var mEDIAN: Double = 0.0,
+		@field:SerializedName("TYPE") var tYPE: String = "",
+		@field:SerializedName("IMAGEURL") var iMAGEURL: String = "",
+		@field:SerializedName("VOLUMEDAY") var vOLUMEDAY: Double = 0.0,
+		@field:SerializedName("VOLUME24HOUR") var vOLUME24HOUR: Double = 0.0,
+		@field:SerializedName("MARKET") var mARKET: String = "",
+		@field:SerializedName("PRICE") var pRICE: Double = 0.0,
+		@field:SerializedName("CHANGEPCTDAY") var cHANGEPCTDAY: Double = 0.0,
+		@field:SerializedName("TOTALTOPTIERVOLUME24H") var tOTALTOPTIERVOLUME24H: Double = 0.0,
+		@field:SerializedName("CONVERSIONLASTUPDATE") var cONVERSIONLASTUPDATE: Int = 0,
+	) : RealmObject(), Serializable
+
+	@RealmClass
 	open class RAW(
-		@SerializedName("USD") var usd: USD? = null
+		@SerializedName("USD") var usd: RawUSD? = null
 	) : RealmObject(), Serializable
 
 	@RealmClass
