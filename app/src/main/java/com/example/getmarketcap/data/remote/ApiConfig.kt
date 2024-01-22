@@ -12,7 +12,7 @@ class ApiConfig private constructor() {
 
     companion object {
 
-        inline fun <reified T> getApiService(context: Context ): ApiService {
+        inline fun getApiService(context: Context ): ApiService {
             val chuckerInterceptor = ChuckerInterceptor.Builder(context)
                 .collector(ChuckerCollector(context))
                 .maxContentLength(250000L)
