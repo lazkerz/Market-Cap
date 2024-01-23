@@ -4,21 +4,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.getmarketcap.R
 import com.example.getmarketcap.data.remote.ApiConfig
 import com.example.getmarketcap.model.DataItem
 import com.example.getmarketcap.model.MarketCapResponse
+import com.example.getmarketcap.presentation.adapter.MarketCapAdapter
 import com.example.getmarketcap.presentation.presenter.MarketCapPresenter
 import com.example.getmarketcap.presentation.view.MarketView
 import com.example.getmarketcap.utils.ResultState
 import io.realm.Realm
 import io.realm.RealmList
-import io.realm.RealmResults
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), MarketView {
 
     private lateinit var presenter: MarketCapPresenter
+    private lateinit var adapter: MarketCapAdapter
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +37,11 @@ class MainActivity : AppCompatActivity(), MarketView {
             , this
 
         )
+
+        recyclerView = findViewById(R.id.rvList)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = MarketCapAdapter(this, emptyList())
+        recyclerView.adapter = adapter
 
         lifecycleScope.launch {
             presenter.getMarketCapData()
@@ -49,6 +58,7 @@ class MainActivity : AppCompatActivity(), MarketView {
             is ResultState.Success -> {
                 // Handle data berhasil diterima
                 val marketCapData = result.data
+                // val marketCapData = result.data`
                 Toast.makeText(this, "Found Market Cap Data", Toast.LENGTH_SHORT).show();
 
                 // Lakukan sesuatu dengan data, contohnya:
