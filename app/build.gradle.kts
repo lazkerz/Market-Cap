@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("io.realm.kotlin")
+    id ("io.realm.kotlin") version "1.11.0"
     id("kotlin-kapt")
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
 }
@@ -16,7 +16,6 @@ android {
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     }

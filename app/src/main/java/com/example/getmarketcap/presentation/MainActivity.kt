@@ -29,6 +29,12 @@ class MainActivity : AppCompatActivity(), MarketView {
         setContentView(R.layout.activity_main)
 
         Realm.init(this)
+        val realmConfig = RealmConfiguration.Builder()
+            .name("marketcap.realm")
+            .deleteRealmIfMigrationNeeded()
+            .schemaVersion(14)
+            .build()
+        Realm.setDefaultConfiguration(realmConfig)
 
         val apiService = ApiConfig.getApiService(this)
 
@@ -37,7 +43,6 @@ class MainActivity : AppCompatActivity(), MarketView {
             , this
 
         )
-
         recyclerView = findViewById(R.id.rvList)
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = MarketCapAdapter(this, emptyList())
