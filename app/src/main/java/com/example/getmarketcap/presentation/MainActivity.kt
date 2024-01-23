@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity(), MarketView {
         presenter = MarketCapPresenter(
             apiService
             , this
-
         )
 
         lifecycleScope.launch {
