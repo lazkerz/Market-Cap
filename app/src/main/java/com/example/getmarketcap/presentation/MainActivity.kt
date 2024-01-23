@@ -13,6 +13,7 @@ import com.example.getmarketcap.presentation.view.MarketView
 import com.example.getmarketcap.utils.ResultState
 import io.realm.Realm
 import io.realm.RealmList
+import io.realm.RealmResults
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), MarketView {
@@ -37,15 +38,17 @@ class MainActivity : AppCompatActivity(), MarketView {
             presenter.getMarketCapData()
             presenter.saveDataToRealm(DataItem())
             presenter.saveDataFromRetrofit(MarketCapResponse())
+            presenter.isDataInRealm()
+            presenter.retrieveDataFromRealm()
         }
 
     }
 
-    override fun onMarketCapDataResult(result: ResultState<RealmList<DataItem>>) {
+    override fun onMarketCapData(result: ResultState<RealmList<DataItem>>) {
         when (result) {
             is ResultState.Success -> {
                 // Handle data berhasil diterima
-//                val marketCapData = result.data
+                val marketCapData = result.data
                 Toast.makeText(this, "Found Market Cap Data", Toast.LENGTH_SHORT).show();
 
                 // Lakukan sesuatu dengan data, contohnya:
@@ -53,7 +56,7 @@ class MainActivity : AppCompatActivity(), MarketView {
             }
             is ResultState.Error -> {
                 // Handle jika terjadi error
-//                val errorMessage = result.error
+                val errorMessage = result.error
                 Toast.makeText(this, "data not found", Toast.LENGTH_SHORT).show();
                 // Lakukan sesuatu dengan pesan error, contohnya:
                 // tampilkan pesan error kepada pengguna

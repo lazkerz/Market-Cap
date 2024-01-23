@@ -12,6 +12,7 @@ import com.example.getmarketcap.presentation.view.MarketView
 import com.example.getmarketcap.utils.ResultState
 import io.realm.Realm
 import io.realm.RealmList
+import io.realm.RealmResults
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,6 +21,7 @@ import retrofit2.Response
 class MarketCapPresenter(
     private val apiservice: ApiService,
     private val view: MarketView,
+
 )  {
 
     fun getMarketCapData() {
@@ -33,23 +35,23 @@ class MarketCapPresenter(
                 ) {
                     if (response.isSuccessful) {
                         val items = response.body()?.data
-                        view.onMarketCapDataResult(ResultState.Success(items ?: RealmList()))
+                        view.onMarketCapData(ResultState.Success(items ?: RealmList()))
                         Log.d("MarketCap", "Response: $response")
                     } else {
                         Log.e("MarketCap", "Error: ${response.message()}")
-                        view.onMarketCapDataResult(ResultState.Error(response.message()))
+                        view.onMarketCapData(ResultState.Error(response.message()))
                     }
                 }
 
                 override fun onFailure(call: Call<MarketCapResponse>, t: Throwable) {
                     Log.e("MarketCap", "Error: ${t.message}")
-                    view.onMarketCapDataResult(ResultState.Error(t.message.toString()))
+                    view.onMarketCapData(ResultState.Error(t.message.toString()))
                 }
             })
 
         } catch (e: Exception) {
             Log.e("MarketCap", "Error: ${e.message}")
-            view.onMarketCapDataResult(ResultState.Error(e.message.toString()))
+            view.onMarketCapData(ResultState.Error(e.message.toString()))
         }
     }
 
@@ -79,6 +81,31 @@ class MarketCapPresenter(
             }
             saveDataToRealm(simplifiedDataItem)
         }
+    }
+
+    fun isDataInRealm(): Boolean {
+        val realm = Realm.getDefaultInstance()
+        val result: RealmResults<DataItem> = realm.where(DataItem::class.java).findAll()
+        val dataExists = result.isNotEmpty()
+        realm.close()
+        return dataExists
+    }
+
+    fun retrieveDataFromRealm() {
+        val realm = Realm.getDefaultInstance()
+        val result: RealmResults<DataItem> = realm.where(DataItem::class.java).findAll()
+
+        if (result.isNotEmpty()) {
+            // Data exists in Realm, you can now use it
+            val items = RealmList<DataItem>().apply {
+                addAll(realm.copyFromRealm(result))
+            }
+            view.onMarketCapData(ResultState.Success(items))
+        } else {
+            view.onMarketCapData(ResultState.Error("No data in Realm"))
+        }
+
+        realm.close()
     }
 
 
