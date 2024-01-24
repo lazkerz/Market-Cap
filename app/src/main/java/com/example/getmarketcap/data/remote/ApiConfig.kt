@@ -35,18 +35,6 @@ class ApiConfig private constructor() {
                 .addInterceptor(chuckerInterceptor)
                 .build()
 
-            val realmConfig = RealmConfiguration.Builder()
-                .name("marketcap.realm")
-                .deleteRealmIfMigrationNeeded()
-                .schemaVersion(14)
-//                .initialData {realm ->
-//                    var initialDataItem = realm.createObject(MarketCapResponse::class.java)
-//                    initialDataItem.data,
-//                    initialDataItem.metaData,
-//                }
-                .build()
-            Realm.setDefaultConfiguration(realmConfig)
-
             return retrofit.newBuilder().client(client).build().create(ApiService::class.java)
         }
 

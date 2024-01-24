@@ -12,6 +12,7 @@ import com.example.getmarketcap.presentation.presenter.MarketCapPresenter
 import com.example.getmarketcap.presentation.view.MarketView
 import com.example.getmarketcap.utils.ResultState
 import io.realm.Realm
+import io.realm.RealmConfiguration
 import io.realm.RealmList
 import io.realm.RealmResults
 import kotlinx.coroutines.launch
@@ -25,6 +26,13 @@ class MainActivity : AppCompatActivity(), MarketView {
         setContentView(R.layout.activity_main)
 
         Realm.init(this)
+        val realmConfig = RealmConfiguration.Builder()
+            .name("marketcap.realm")
+            .deleteRealmIfMigrationNeeded()
+            .schemaVersion(14)
+            .allowWritesOnUiThread(true)
+            .build()
+        Realm.setDefaultConfiguration(realmConfig)
 
         val apiService = ApiConfig.getApiService(this)
 
