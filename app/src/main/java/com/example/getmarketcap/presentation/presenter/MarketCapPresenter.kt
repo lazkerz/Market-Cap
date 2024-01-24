@@ -35,7 +35,7 @@ class MarketCapPresenter(
                 ) {
                     if (response.isSuccessful) {
                         val items = response.body()?.data
-                        if (items != null && items.isNotEmpty()){
+                        if (items != null ){
                             saveDataToRealm(items)
                         }
                         view.onMarketCapData(ResultState.Success(items ?: RealmList()))
@@ -59,7 +59,7 @@ class MarketCapPresenter(
     }
 
 
-    private fun saveDataToRealm(dataItem: RealmList<DataItem>) {
+    fun saveDataToRealm(dataItem: RealmList<DataItem>) {
         val realm = Realm.getDefaultInstance()
         realm.executeTransaction { realm ->
             realm.copyToRealm(dataItem)
