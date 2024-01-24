@@ -58,7 +58,7 @@ class MarketCapPresenter(
     fun saveDataToRealm(dataItem: DataItem) {
         val realm = Realm.getDefaultInstance()
         realm.executeTransaction { realm ->
-            realm.copyToRealmOrUpdate(dataItem)
+            realm.copyToRealm(dataItem)
         }
         realm.close()
     }
