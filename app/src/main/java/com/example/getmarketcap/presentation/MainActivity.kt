@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity(), MarketView {
         presenter = MarketCapPresenter(
             apiService
             , this
-
         )
         recyclerView = findViewById(R.id.rvList)
         recyclerView.layoutManager = LinearLayoutManager(this)

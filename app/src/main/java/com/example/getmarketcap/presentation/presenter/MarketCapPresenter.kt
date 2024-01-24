@@ -2,6 +2,7 @@ package com.example.getmarketcap.presentation.presenter
 
 
 import android.util.Log
+import android.widget.Toast
 import com.example.getmarketcap.data.remote.ApiService
 import com.example.getmarketcap.model.CoinInfo
 import com.example.getmarketcap.model.DataItem
@@ -64,22 +65,26 @@ class MarketCapPresenter(
     }
 
     fun saveDataFromRetrofit(marketCapResponse: MarketCapResponse) {
-        val coinInfoName = marketCapResponse.data[0]?.coinInfo?.name
-        val coinInfoFullName = marketCapResponse.data[0]?.coinInfo?.fullName
-        val rawPrice = marketCapResponse.data[0]?.raw?.usd?.price
-        if (!coinInfoName.isNullOrBlank()) {
-            val simplifiedDataItem = DataItem().apply {
-                coinInfo = CoinInfo().apply {
-                    name = coinInfoName
-                    fullName = coinInfoFullName ?: ""
-                }
-                raw = RAW().apply { // Perbaiki penulisan class RAW
-                    usd = RawUSD().apply {
-                        price = rawPrice ?: 0.0 // Jika rawPrice null, berikan nilai default
+        marketCapResponse.data.firstOrNull()?.let { firstItem ->
+            val coinInfoName = firstItem.coinInfo?.name
+            val coinInfoFullName = firstItem.coinInfo?.fullName
+            val rawPrice = firstItem.raw?.usd?.price
+
+            if (!coinInfoName.isNullOrBlank()) {
+                val simplifiedDataItem = DataItem().apply {
+                    coinInfo = CoinInfo().apply {
+                        name = coinInfoName
+                        fullName = coinInfoFullName ?: ""
+                    }
+                    raw = RAW().apply {
+                        usd = RawUSD().apply {
+                            price = rawPrice ?: 0.0
+                        }
                     }
                 }
+
+                saveDataToRealm(simplifiedDataItem)
             }
-            saveDataToRealm(simplifiedDataItem)
         }
     }
 
