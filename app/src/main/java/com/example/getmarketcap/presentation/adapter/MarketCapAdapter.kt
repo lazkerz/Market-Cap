@@ -8,13 +8,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.getmarketcap.R
 import com.example.getmarketcap.model.DataItem
+import io.realm.RealmResults
+import kotlinx.coroutines.NonDisposableHandle.parent
 
 class MarketCapAdapter(
     private val context: Context,
-    private val list: List<DataItem>
+    private val onMarketCapData: RealmResults<DataItem>
 ) : RecyclerView.Adapter<MarketCapAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var tvName: TextView = itemView.findViewById(R.id.tvNama)
         var tvFullnama: TextView = itemView.findViewById(R.id.tvFullnama)
         var tvPrice: TextView = itemView.findViewById(R.id.tvPrice)
@@ -30,14 +32,14 @@ class MarketCapAdapter(
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return onMarketCapData.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = list[position]
+        val onMarketCapData = onMarketCapData[position]
 
-        holder.tvName.text = item.coinInfo?.name ?: ""
-        holder.tvFullnama.text = item.coinInfo?.fullName ?: ""
-        holder.tvPrice.text = (item.raw?.usd?.price ?: "").toString()
+        holder.tvName.text = onMarketCapData?.coinInfo?.name ?: ""
+        holder.tvFullnama.text = onMarketCapData?.coinInfo?.fullName ?: ""
+        holder.tvPrice.text = (onMarketCapData?.raw?.usd?.price ?: "").toString()
     }
 }

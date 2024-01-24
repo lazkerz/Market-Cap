@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("io.realm.kotlin")
     id("kotlin-kapt")
+    id("realm-android")
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
 }
 
@@ -37,7 +38,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    kapt {
+        generateStubs = true
+    }
 }
+
+
 
 dependencies {
 
@@ -77,8 +84,4 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 
-}
-
-kapt {
-    generateStubs = true
 }
