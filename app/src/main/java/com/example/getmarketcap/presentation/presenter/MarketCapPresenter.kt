@@ -35,6 +35,9 @@ class MarketCapPresenter(
                 ) {
                     if (response.isSuccessful) {
                         val items = response.body()?.data
+                        if (items != null && items.isNotEmpty()){
+                            saveDataToRealm(items)
+                        }
                         view.onMarketCapData(ResultState.Success(items ?: RealmList()))
                         Log.d("MarketCap", "Response: $response")
                     } else {
@@ -55,32 +58,13 @@ class MarketCapPresenter(
         }
     }
 
-    fun saveDataToRealm(dataItem: DataItem) {
+
+    private fun saveDataToRealm(dataItem: RealmList<DataItem>) {
         val realm = Realm.getDefaultInstance()
         realm.executeTransaction { realm ->
-            realm.copyToRealmOrUpdate(dataItem)
+            realm.copyToRealm(dataItem)
         }
         realm.close()
-    }
-
-    fun saveDataFromRetrofit(marketCapResponse: MarketCapResponse) {
-        val coinInfoName = marketCapResponse.data[0]?.coinInfo?.name
-        val coinInfoFullName = marketCapResponse.data[0]?.coinInfo?.fullName
-        val rawPrice = marketCapResponse.data[0]?.raw?.usd?.price
-        if (!coinInfoName.isNullOrBlank()) {
-            val simplifiedDataItem = DataItem().apply {
-                coinInfo = CoinInfo().apply {
-                    name = coinInfoName
-                    fullName = coinInfoFullName ?: ""
-                }
-                raw = RAW().apply { // Perbaiki penulisan class RAW
-                    usd = RawUSD().apply {
-                        price = rawPrice ?: 0.0 // Jika rawPrice null, berikan nilai default
-                    }
-                }
-            }
-            saveDataToRealm(simplifiedDataItem)
-        }
     }
 
     fun isDataInRealm(): Boolean {

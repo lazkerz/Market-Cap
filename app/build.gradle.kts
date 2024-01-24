@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id ("io.realm.kotlin") version "1.11.0"
     id("kotlin-kapt")
+    id("realm-android")
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
 }
 

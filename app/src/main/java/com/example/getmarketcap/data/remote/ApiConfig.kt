@@ -39,11 +39,6 @@ class ApiConfig private constructor() {
                 .name("marketcap.realm")
                 .deleteRealmIfMigrationNeeded()
                 .schemaVersion(14)
-//                .initialData {realm ->
-//                    var initialDataItem = realm.createObject(MarketCapResponse::class.java)
-//                    initialDataItem.data,
-//                    initialDataItem.metaData,
-//                }
                 .build()
             Realm.setDefaultConfiguration(realmConfig)
 
