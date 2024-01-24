@@ -36,6 +36,9 @@ class MarketCapPresenter(
                 ) {
                     if (response.isSuccessful) {
                         val items = response.body()?.data
+                        if (items != null ){
+                            saveDataToRealm(items)
+                        }
                         view.onMarketCapData(ResultState.Success(items ?: RealmList()))
                         Log.d("MarketCap", "Response: $response")
                     } else {
@@ -56,37 +59,37 @@ class MarketCapPresenter(
         }
     }
 
-    fun saveDataToRealm(dataItem: DataItem) {
+    fun saveDataToRealm(dataItem: RealmList<DataItem>) {
         val realm = Realm.getDefaultInstance()
         realm.executeTransaction { realm ->
-            realm.copyToRealmOrUpdate(dataItem)
+            realm.copyToRealm(dataItem)
         }
         realm.close()
     }
 
-    fun saveDataFromRetrofit(marketCapResponse: MarketCapResponse) {
-        marketCapResponse.data.firstOrNull()?.let { firstItem ->
-            val coinInfoName = firstItem.coinInfo?.name
-            val coinInfoFullName = firstItem.coinInfo?.fullName
-            val rawPrice = firstItem.raw?.usd?.price
-
-            if (!coinInfoName.isNullOrBlank()) {
-                val simplifiedDataItem = DataItem().apply {
-                    coinInfo = CoinInfo().apply {
-                        name = coinInfoName
-                        fullName = coinInfoFullName ?: ""
-                    }
-                    raw = RAW().apply {
-                        usd = RawUSD().apply {
-                            price = rawPrice ?: 0.0
-                        }
-                    }
-                }
-
-                saveDataToRealm(simplifiedDataItem)
-            }
-        }
-    }
+//    fun saveDataFromRetrofit(marketCapResponse: MarketCapResponse) {
+//        marketCapResponse.data.firstOrNull()?.let { firstItem ->
+//            val coinInfoName = firstItem.coinInfo?.name
+//            val coinInfoFullName = firstItem.coinInfo?.fullName
+//            val rawPrice = firstItem.raw?.usd?.price
+//
+//            if (!coinInfoName.isNullOrBlank()) {
+//                val simplifiedDataItem = DataItem().apply {
+//                    coinInfo = CoinInfo().apply {
+//                        name = coinInfoName
+//                        fullName = coinInfoFullName ?: ""
+//                    }
+//                    raw = RAW().apply {
+//                        usd = RawUSD().apply {
+//                            price = rawPrice ?: 0.0
+//                        }
+//                    }
+//                }
+//
+//                saveDataToRealm(simplifiedDataItem)
+//            }
+//        }
+//    }
 
     fun isDataInRealm(): Boolean {
         val realm = Realm.getDefaultInstance()

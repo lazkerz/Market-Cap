@@ -43,8 +43,7 @@ class MainActivity : AppCompatActivity(), MarketView {
 
         lifecycleScope.launch {
             presenter.getMarketCapData()
-            presenter.saveDataToRealm(DataItem())
-            presenter.saveDataFromRetrofit(MarketCapResponse())
+            presenter.saveDataToRealm(RealmList(DataItem()))
             presenter.isDataInRealm()
             presenter.retrieveDataFromRealm()
         }
