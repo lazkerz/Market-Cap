@@ -23,8 +23,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity(), MarketView {
 
     private lateinit var presenter: MarketCapPresenter
-    private lateinit var adapter: MarketCapAdapter
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var marketadapter: MarketCapAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,10 +44,10 @@ class MainActivity : AppCompatActivity(), MarketView {
             apiService
             , this
         )
-        recyclerView = findViewById(R.id.rvList)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = MarketCapAdapter(this, Realm.getDefaultInstance().where(DataItem::class.java).findAllAsync()) // Isi dengan data yang benar
-        recyclerView.adapter = adapter
+        val rvList =findViewById<RecyclerView>(R.id.rvList)
+
+        marketadapter = MarketCapAdapter(this, Realm.getDefaultInstance().where(DataItem::class.java).findAllAsync())
+        rvList.adapter = marketadapter
 
         lifecycleScope.launch {
             presenter.getMarketCapData()
