@@ -67,6 +67,7 @@ import java.util.Collections.list
 		@field:SerializedName("TOSYMBOL") var toSymbol: String = "",
 		@field:SerializedName("FLAGS") var flags: String = "",
 		@field:SerializedName("LASTMARKET") var lastMarket: String = "",
+		@field:SerializedName("PRICE") var price: String = "",
 	) : RealmObject(), Serializable
 
 	@RealmClass

@@ -39,7 +39,7 @@ class MarketCapAdapter(
 
         holder.tvName.text = item?.coinInfo?.name ?: ""
         holder.tvFullnama.text = item?.coinInfo?.fullName ?: ""
-        holder.tvPrice.text = (item?.raw?.usd?.price ?: "").toString()
+        holder.tvPrice.text = (item?.display?.usd?.price ?: "$ ").toString()
     }
 
     fun updateData(newList: RealmList<DataItem>) {

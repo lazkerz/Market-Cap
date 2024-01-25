@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
->>>>>>> 5ba327e968dca2ad5b51470b1a460c06c1cf7102
 buildscript {
     repositories {
         mavenCentral()
