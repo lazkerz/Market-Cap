@@ -3,7 +3,7 @@ package com.example.getmarketcap.data.remote
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.example.getmarketcap.model.MarketCapResponse
+import com.example.getmarketcap.model.Top24Response
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import okhttp3.Interceptor

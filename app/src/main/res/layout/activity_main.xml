@@ -5,26 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.MainActivity"
-    android:backgroundTint="@color/white"
+    android:backgroundTint="#ffffff"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tvTittle"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/tittle"
         android:layout_gravity="center"
         android:textSize="20dp"
-        android:textColor="@color/black"/>
+        android:textColor="#FF000000"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"
         tools:listitem="@layout/item_market_cap" />
 
 </LinearLayout>

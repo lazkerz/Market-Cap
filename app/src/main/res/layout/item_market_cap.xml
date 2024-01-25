@@ -5,31 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:backgroundTint="@color/white"
+    android:layout_margin="5dp"
     android:clickable="true"
     android:focusable="true"
     app:cardCornerRadius="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/imgUrl"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            tools:ignore="ImageContrastCheck" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
 
         <TextView
             android:id="@+id/tvNama"
             android:layout_width="144dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:text="@string/nama"
             android:textColor="@color/black"
-            android:textSize="15dp"
-            app:layout_constraintStart_toEndOf="@+id/imgUrl"
-            tools:layout_editor_absoluteY="29dp" />
+            android:textSize="15dp"/>
 
         <TextView
             android:id="@+id/tvFullnama"
@@ -39,7 +32,6 @@
             android:textSize="15dp"
             android:text="@string/fullname"
             android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/imgUrl"
             app:layout_constraintTop_toBottomOf="@+id/tvNama" />
 
         <TextView
