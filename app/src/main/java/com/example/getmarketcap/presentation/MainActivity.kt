@@ -17,13 +17,13 @@ import com.example.getmarketcap.utils.ResultState
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmList
+import io.realm.kotlin.ext.realmListOf
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), MarketView {
 
     private lateinit var presenter: MarketCapPresenter
     private lateinit var adapter: MarketCapAdapter
-    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,14 +38,14 @@ class MainActivity : AppCompatActivity(), MarketView {
             , this
 
         )
-        recyclerView = findViewById(R.id.rvList)
+        var recyclerView = findViewById<RecyclerView>(R.id.rvList)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = MarketCapAdapter(this, emptyList())
+
+        adapter = MarketCapAdapter(this, RealmList())
         recyclerView.adapter = adapter
 
         lifecycleScope.launch {
             presenter.getMarketCapData()
-            presenter.isDataInRealm()
             presenter.retrieveDataFromRealm()
         }
 
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(), MarketView {
             is ResultState.Success -> {
                 // Handle data berhasil diterima
                 val marketCapData = result.data
-                // val marketCapData = result.data`
+                adapter.updateData(marketCapData)
                 Toast.makeText(this, "Found Market Cap Data", Toast.LENGTH_SHORT).show();
 
                 // Lakukan sesuatu dengan data, contohnya:
@@ -65,6 +65,7 @@ class MainActivity : AppCompatActivity(), MarketView {
             is ResultState.Error -> {
                 // Handle jika terjadi error
                 val errorMessage = result.error
+                (errorMessage)
                 Toast.makeText(this, "data not found", Toast.LENGTH_SHORT).show();
                 // Lakukan sesuatu dengan pesan error, contohnya:
                 // tampilkan pesan error kepada pengguna

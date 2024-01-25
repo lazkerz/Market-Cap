@@ -62,25 +62,16 @@ class MarketCapPresenter(
     fun saveDataToRealm(dataItem: RealmList<DataItem>) {
         val realm = Realm.getDefaultInstance()
         realm.executeTransaction { realm ->
-            realm.copyToRealm(dataItem)
+            realm.copyToRealmOrUpdate(dataItem)
         }
         realm.close()
     }
 
-    fun isDataInRealm(): Boolean {
-        val realm = Realm.getDefaultInstance()
-        val result: RealmResults<DataItem> = realm.where(DataItem::class.java).findAll()
-        val dataExists = result.isNotEmpty()
-        realm.close()
-        return dataExists
-    }
-
     fun retrieveDataFromRealm() {
         val realm = Realm.getDefaultInstance()
-        val result: RealmResults<DataItem> = realm.where(DataItem::class.java).findAll()
+        val result = realm.where(DataItem::class.java).findAll()
 
         if (result.isNotEmpty()) {
-            // Data exists in Realm, you can now use it
             val items = RealmList<DataItem>().apply {
                 addAll(realm.copyFromRealm(result))
             }

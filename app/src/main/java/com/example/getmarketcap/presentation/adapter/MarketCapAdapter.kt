@@ -8,10 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.getmarketcap.R
 import com.example.getmarketcap.model.DataItem
+import io.realm.RealmList
 
 class MarketCapAdapter(
     private val context: Context,
-    private val list: List<DataItem>
+    private val list: RealmList<DataItem>
 ) : RecyclerView.Adapter<MarketCapAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -36,8 +37,14 @@ class MarketCapAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
 
-        holder.tvName.text = item.coinInfo?.name ?: ""
-        holder.tvFullnama.text = item.coinInfo?.fullName ?: ""
-        holder.tvPrice.text = (item.raw?.usd?.price ?: "").toString()
+        holder.tvName.text = item?.coinInfo?.name ?: ""
+        holder.tvFullnama.text = item?.coinInfo?.fullName ?: ""
+        holder.tvPrice.text = (item?.raw?.usd?.price ?: "").toString()
+    }
+
+    fun updateData(newList: RealmList<DataItem>) {
+        list.clear()
+        list.addAll(newList)
+        notifyDataSetChanged()
     }
 }
