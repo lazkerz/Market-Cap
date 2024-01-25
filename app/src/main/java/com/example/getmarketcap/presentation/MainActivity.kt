@@ -17,7 +17,6 @@ import com.example.getmarketcap.utils.ResultState
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmList
-import io.realm.kotlin.ext.realmListOf
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), MarketView {
@@ -30,13 +29,19 @@ class MainActivity : AppCompatActivity(), MarketView {
         setContentView(R.layout.activity_main)
 
         Realm.init(this)
+        val realmConfig = RealmConfiguration.Builder()
+            .name("marketcap.realm")
+            .deleteRealmIfMigrationNeeded()
+            .schemaVersion(20)
+            .allowWritesOnUiThread(true)
+            .build()
+        Realm.setDefaultConfiguration(realmConfig)
 
         val apiService = ApiConfig.getApiService(this)
 
         presenter = MarketCapPresenter(
             apiService
             , this
-
         )
         var recyclerView = findViewById<RecyclerView>(R.id.rvList)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -78,5 +83,4 @@ class MainActivity : AppCompatActivity(), MarketView {
             }
         }
     }
-
 }

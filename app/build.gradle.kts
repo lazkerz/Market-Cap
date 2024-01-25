@@ -37,7 +37,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    kapt {
+        generateStubs = true
+    }
 }
+
+
 
 dependencies {
 
@@ -77,8 +83,4 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 
-}
-
-kapt {
-    generateStubs = true
 }

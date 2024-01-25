@@ -35,12 +35,16 @@ class ApiConfig private constructor() {
                 .addInterceptor(chuckerInterceptor)
                 .build()
 
+<<<<<<< HEAD
             val realmConfig = RealmConfiguration.Builder()
                 .name("marketcap.realm")
                 .deleteRealmIfMigrationNeeded()
                 .schemaVersion(14)
                 .build()
             Realm.setDefaultConfiguration(realmConfig)
+=======
+
+>>>>>>> 5ba327e968dca2ad5b51470b1a460c06c1cf7102
 
             return retrofit.newBuilder().client(client).build().create(ApiService::class.java)
         }
